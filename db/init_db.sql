@@ -20,12 +20,12 @@ create table partners (
 	id int primary key generated always as identity,
 	partner_type int not null references partner_types(id),
 	partner_name varchar(250) not null,
-	director_name varchar(150) not null,
-	email varchar(100) not null,
-	phone varchar(20) not null,
+	director_name varchar(150) null,
+	email varchar(100) null,
+	phone varchar(20) null,
 	address varchar(1000) null,
-	inn varchar(11) not null,
-	rating int not null
+	inn varchar(11) null,
+	rating int null
 );
 
 create table product_types(

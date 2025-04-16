@@ -28,6 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         pic.setPixmap(QtGui.QPixmap.fromImage(self.image_qt))
         self.scene.setSceneRect(0, 0, 48, 48)
         self.scene.addItem(pic)
+        self.load_partner_types()
         self.load_records()
         self.ui.list_records.itemDoubleClicked.connect(self.edit_member)
         self.ui.button_add.clicked.connect(self.add_member)
@@ -49,7 +50,11 @@ class MainWindow(QtWidgets.QMainWindow):
             return applicator
         return decorate
 
-    @catch_error('Загрузка спика записей')
+    @catch_error('Загрузка типов партнеров')
+    def load_partner_types(self):
+        self.partner_types = repository.get_partner_types()
+
+    @catch_error('Загрузка спиcка записей')
     def load_records(self):
         self.ui.list_records.clear()
         self.records = repository.get_records()
@@ -68,7 +73,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def edit_member_int(self):
         item = self.ui.list_records.selectedItems()[0]
         record = repository.get_record_by_id(item.data(100))
-        dlg = Dialog(self, record)
+        dlg = Dialog(self, self.partner_types, record)
         dlg.setWindowTitle("Изменение записи")
         dlg_result = dlg.exec()
         if dlg_result == 1:
@@ -82,7 +87,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @catch_error('Добавление записи')
     def add_member_int(self):
-        dlg = Dialog(self)
+        dlg = Dialog(self, self.partner_types)
         dlg.setWindowTitle("Добавление записи")
         dlg_result = dlg.exec()
         if dlg_result == 1:
