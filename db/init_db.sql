@@ -8,7 +8,7 @@ drop table if exists material_types;
 create table material_types(
 	id int primary key generated always as identity,
 	type_name varchar(20) not null,
-	defect_part real not null
+	failure_rate decimal not null
 );
 
 create table partner_types(
