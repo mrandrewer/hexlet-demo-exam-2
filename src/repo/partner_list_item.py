@@ -19,12 +19,10 @@ class PartnerListItem:
     def partner_display_name(self):
         return f"{self.type_name} | {self.partner_name}"
 
-    # Свойство используется для формирования человекочитаемого значения
     @property
     def discount_display_value(self):
         return f"{self.discount}%"
 
-    # Свойство используется для формирования человекочитаемого значения
     @property
     def rating_display_value(self):
         return f"Рейтинг: {self.rating}"

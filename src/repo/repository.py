@@ -58,7 +58,7 @@ def get_records():
     records = cursor.fetchall()
     result = []
     for record in records:
-        result.append(PartnerTypeItem(*record))
+        result.append(PartnerListItem(*record))
     cursor.close()
     conn.close()
     return result
