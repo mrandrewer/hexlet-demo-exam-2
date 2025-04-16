@@ -94,12 +94,26 @@ def update_record_by_id(record: PartnerEditItem):
     conn = create_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        SELECT public.create_or_updatefuncName(%s, %s, %s);
+        UPDATE public.partners
+            SET
+                partner_type=%s,
+                partner_name=%s,
+                director_name=%s,
+                email=%s,
+                phone=%s,
+                address=%s,
+                rating=%s
+        WHERE id = %s;
         """,
         [
-            record.id,
-            record.full_name,
-            record.birth_date
+            record.type,
+            record.partner_name,
+            record.director_name,
+            record.email,
+            record.phone,
+            record.address,
+            record.rating,
+            record.id
         ])
     conn.commit()
     cursor.close()
